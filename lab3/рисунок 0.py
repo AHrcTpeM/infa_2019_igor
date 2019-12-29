@@ -1,13 +1,22 @@
-from graph import *
-
-x1 = 100; y1 = 100
-x2 = 300; y2 = 200
-N = 10
-rectangle (x1, y1, x2, y2)
-h = (x2 - x1) / (N + 1)
-x = x1 + h
-for i in range(N):
-  line(x, y1, x, y2)
-  x += h
-
-run()
+windowSize(width, height)
+    установка ширины (width) и высоты (height) рабочей области окна.
+width, height = windowSize()
+    при вызове без параметров возвращает кортеж (width,height) с текущими размерами.
+penSize(width)
+penColor(r, g, b)
+penColor(color)
+сolor = penColor()
+brushColor(r, g, b)
+brushColor(color)
+сolor = brushColor()
+randColor()
+point(x, y)
+moveTo(x, y)
+moveTo(pos)
+lineTo(x, y)
+lineTo(pos)
+line(x1, y1, x2, y2)
+polyline(p)
+polygon(points)
+rectangle(x1, y1, x2, y2)
+circle(x, y, r)
