@@ -4,25 +4,13 @@ import time
 WIDTH = 400
 HEIGHT = 200
 
-class Ball:
-    def __init__(self):
-        self.R = randint(20, 50)
-        self.x = randint(self.R, WIDTH - self.R)
-        self.y = randint(self.R, HEIGHT - self.R)
-        self.dx, self.dy = (+2, +3)
-        self.ball_id = canvas.create_oval(self.x - self.R,
-                                          self.y - self.R,
-                                          self.x + self.R,
-                                          self.y + self.R, fill="green")
-
-
 
 s=0
 colors = ['red','orange','yellow','green','blue']
 def new_ball():
     canv.delete(ALL)
     global x, y, r, s
-    canv.create_text(20, 15, text="ะกัะตั: %i" % s,
+    canv.create_text(20, 15, text="ั๗ๅ๒: %i" % s,
                      anchor=W, font="Verdana 14")
     x = rnd(100,700)
     y = rnd(100,500)
