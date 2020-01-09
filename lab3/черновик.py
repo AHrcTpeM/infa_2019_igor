@@ -1,54 +1,45 @@
-from graph import *
+from tkinter import *
+from random import randrange as rnd, choice
+import time
+WIDTH = 400
+HEIGHT = 200
 
-canvasSize(400, 400)
-brushColor(0, 0, 255)
-rectangle(0,0,400,400)
 
-x=200
-y=50
-a=10
-N=10
-dx=0
-dy=0
-snake = []
-penColor("yellow")
-brushColor("yellow")
-for i in range(N):
-  obj = rectangle(x+i*a, y, x+i*a+a, y+a)
-  snake.append( obj )
-  brushColor("green")
+s=0
+colors = ['red','orange','yellow','green','blue']
+def new_ball():
+    canv.delete(ALL)
+    global x, y, r, s
+    canv.create_text(20, 15, text="Счет: %i" % s,
+                     anchor=W, font="Verdana 14")
+    x = rnd(100,700)
+    y = rnd(100,500)
+    r = rnd(30,50)
+    ball=canv.create_oval(x-r,y-r,x+r,y+r,fill = choice(colors), width=0)
 
-def moveSnake(xNew, yNew):
-  global x, y
-  for k in range(len(snake)-1,0,-1):
-    newCoord = coords(snake[k-1])
-    moveObjectTo(snake[k], newCoord[0],
-                           newCoord[1])
-  moveObjectTo(snake[0], xNew, yNew)
-  x = xNew
-  y = yNew
+    # def motion():
+    #     canv.move(ball, 5, 0)
+    #     if canv.coords(ball)[0] < 700:
+    #         root.after(50, motion)
+    # motion()
 
-def keyPressed(event):
-  global dx, dy
-  if event.keycode == VK_LEFT:
-    dx = -1
-    dy = 0
-  elif event.keycode == VK_RIGHT:
-    dx = 1
-    dy = 0
-  elif event.keycode == VK_UP:
-      dx = 0
-      dy = -1
-  elif event.keycode == VK_DOWN:
-      dx = 0
-      dy = 1
-  elif event.keycode == VK_SPACE:
-      dx = 0
-      dy = 0
-onKey(keyPressed)
+    root.after(1000,new_ball)
 
-def update():
-  if dx or dy:
-    moveSnake( x + dx*a , y + dy*a )
-onTimer(update, 50)
-run()
+def click(event):
+    global s
+    print(x,y,r)
+    print(event.x, event.y)
+    R=((x-event.x)**2+(y-event.y)**2)**0.5
+    if R<r:
+        s+=1
+    else:
+        s-=1
+
+
+root = Tk()
+root.geometry(str(WIDTH) + "x" + str(HEIGHT))
+canv = Canvas(root,bg='white')
+canv.pack(fill=BOTH,expand=1)
+new_ball()
+canv.bind('<Button-1>', click)
+mainloop()
