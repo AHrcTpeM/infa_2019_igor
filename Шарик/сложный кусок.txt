@@ -1,0 +1,16 @@
+s=0
+def click(event):
+    global s, screen, balls
+    for ball in balls:
+        # print(ball.x,ball.y,ball.R)
+        # print(event.x, event.y)
+        r = ((ball.x - event.x) ** 2 + (ball.y - event.y) ** 2) ** 0.5
+        if r < ball.R:
+            s += 2
+            canvas.itemconfig(screen, text="Счет: %i" % s)
+            canvas.delete(ball.ball_id)
+            balls.remove(ball)
+            print(len(balls))
+            balls.append(Ball())
+    s -= 1
+    canvas.itemconfig(screen, text="Счет: %i" % s)
