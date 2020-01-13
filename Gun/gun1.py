@@ -16,8 +16,8 @@ class ball():
         self.x = x
         self.y = y
         self.r = 10
-        self.vx = 1
-        self.vy = 1
+        self.vx = 0
+        self.vy = 0
         self.color = choice(['blue', 'green', 'red', 'brown'])
         self.id = canvas.create_oval(
                 self.x - self.r,
@@ -44,7 +44,6 @@ class ball():
         self.x и self.y с учетом скоростей self.vx и self.vy, силы гравитации, действующей на мяч,
         и стен по краям окна (размер окна 800х600).
         """
-        # FIXME
         self.x += self.vx
         self.y -= self.vy
         self.set_coords()
@@ -57,8 +56,11 @@ class ball():
         Returns:
             Возвращает True в случае столкновения мяча и цели. В противном случае возвращает False.
         """
-        # FIXME
-        return False
+        r = ((t1.x - self.x) ** 2 + (t1.y - self.y) ** 2) ** 0.5
+        if r < self.r + t1.r:
+            # t1.hit()
+            # t1.new_target()
+            return True
 
 
 class gun():
@@ -135,7 +137,7 @@ class target():
         canvas.itemconfig(self.id_points, text=self.points)
 
 
-def new_game():
+def new_game(event=''):
     global gun, t1, screen1, balls, bullet
     t1.new_target()
     bullet = 0
@@ -144,7 +146,6 @@ def new_game():
     canvas.bind('<ButtonRelease-1>', g1.fire2_end)
     canvas.bind('<Motion>', g1.targetting)
 
-    z = 0.03
     t1.live = 1
     while t1.live or balls:
         for b in balls:
