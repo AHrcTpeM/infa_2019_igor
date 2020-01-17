@@ -20,4 +20,3 @@ i = 1
 l.pack()
 e.pack()
 b.pack()
-root1.mainloop() 
